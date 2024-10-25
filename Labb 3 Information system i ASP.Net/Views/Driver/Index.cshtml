@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Driver>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="mb-0">All Drivers</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Index" method="get" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="searchTerm" class="form-control" placeholder="Search by Driver Name" value="@ViewBag.SearchTerm" />
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </form>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Driver</th>
+                        <th>@Html.DisplayNameFor(model => model.First().CarReg)</th>
+                        <th>Responsible Employee</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">No drivers found.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.DriverName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CarReg)</td>
+                                <td>@(item.ResponsibleEmployee != null ? item.ResponsibleEmployee.FirstName + " " + item.ResponsibleEmployee.LastName : "Not Assigned")</td>
+                                <td>
+                                    <a asp-action="DetailsOfDriver" asp-route-driverId="@item.DriverID" class="btn btn-info btn-sm">Details</a>
+                                    <a asp-action="UpdateDriver" asp-route-id="@item.DriverID" class="btn btn-warning btn-sm">Edit</a>
+                                    <form asp-action="Delete" asp-route-driverId="@item.DriverID" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this driver?');">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <div>
+                <a asp-action="CreateDriver" class="btn btn-success">Add New Driver</a>
+            </div>
+        </div>
+    </div>
+</div>

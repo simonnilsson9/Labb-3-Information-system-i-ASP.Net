@@ -1,0 +1,33 @@
+﻿@model ApplicationUser  
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<h2>Details for @Model.UserName</h2>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Employee Information</h5>
+    </div>
+    <div class="card-body">
+        <p><strong>User Name:</strong> @Model.UserName</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p>
+            <strong>Roles:</strong>
+            @if (await UserManager.GetRolesAsync(Model) is var roles && roles.Any())
+            {
+                @string.Join(", ", roles)
+            }
+            else
+            {
+                <span>No roles assigned</span>
+            }
+        </p>
+    </div>
+    <div class="card-footer">        
+        <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>

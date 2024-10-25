@@ -1,0 +1,54 @@
+﻿@model Driver
+
+@{
+    ViewData["Title"] = "Update Driver";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-lg-6 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Edit Driver Details</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateDriver" method="post">
+                        <input type="hidden" asp-for="DriverID" /> <!-- Hidden ID field -->
+
+                        <div class="form-group mb-3">
+                            <label asp-for="DriverName" class="control-label">Driver Name</label>
+                            <input asp-for="DriverName" class="form-control" required />
+                            <span asp-validation-for="DriverName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="CarReg" class="control-label"></label>
+                            <input asp-for="CarReg" class="form-control" required />
+                            <span asp-validation-for="CarReg" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="ResponsibleEmployeeId" class="control-label">Responsible Employee</label>
+                            <select asp-for="ResponsibleEmployeeId" asp-items="ViewBag.Employees" class="form-control" required>
+                                <option value="">Select Employee</option>
+                            </select>
+                            <span asp-validation-for="ResponsibleEmployeeId" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <!-- Center the back button -->
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Back to Dashboard</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

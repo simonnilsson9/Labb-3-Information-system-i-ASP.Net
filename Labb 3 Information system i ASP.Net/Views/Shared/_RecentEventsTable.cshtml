@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Event>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Driver Name</th>
+            <th>Description</th>
+            <th>Time of Event</th>
+            <th>Amount In</th>
+            <th>Amount Out</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null || !Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="text-center">No recent events found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var eventItem in Model)
+            {
+                <tr>                    
+                    <td>@Html.DisplayFor(modelItem => eventItem.Driver.DriverName)</td>
+                    <td>@Html.DisplayFor(modelItem => eventItem.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => eventItem.TimeOfEvent)</td>
+                    <td>@Html.DisplayFor(modelItem => eventItem.AmountIn)</td>
+                    <td>@Html.DisplayFor(modelItem => eventItem.AmountOut)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

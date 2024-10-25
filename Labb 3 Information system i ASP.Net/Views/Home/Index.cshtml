@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Welcome to the Driver System</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-6 mx-auto">
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="card text-center shadow-sm">
+                    <div class="card-header">
+                        <h5>Admin Dashboard</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">As an administrator, you can manage the entire system.</p>
+                        <a asp-controller="Admin" asp-action="Index" class="btn btn-primary">Go to Admin Dashboard</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card text-center shadow-sm">
+                    <div class="card-header">
+                        <h5>User Dashboard</h5>
+                    </div>
+                    <div class="card-body d-flex flex-column align-items-center">                        
+                        <p class="card-text">Welcome back! You can manage drivers and events here.</p>
+                        <div class="d-flex flex-column w-100">                            
+                            <a asp-controller="Driver" asp-action="Index" class="btn btn-primary mb-2">Manage Drivers</a>
+                            <a asp-controller="Events" asp-action="Index" class="btn btn-secondary">Manage Events</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

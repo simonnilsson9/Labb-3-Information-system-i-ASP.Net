@@ -1,0 +1,99 @@
+﻿@model DriverDetailsViewModel
+
+@{
+    ViewData["Title"] = "Driver Details";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="row">
+    <!-- Driver Information Widget -->
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">@Model.Driver.DriverName</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Driver ID:</strong> @Model.Driver.DriverID</p>
+                <p><strong>Registration number:</strong> @Model.Driver.CarReg</p>
+                <p>
+                    <strong>Responsible Employee:</strong>
+                    @(Model.Driver.ResponsibleEmployee != null ? Model.Driver.ResponsibleEmployee.FirstName + " " + Model.Driver.ResponsibleEmployee.LastName : "Not Assigned")
+                </p>
+                <p><strong>Total Amount In:</strong> $@Model.Driver.TotalAmountIn</p>
+                <p><strong>Total Amount Out:</strong> $@Model.Driver.TotalAmountOut</p>
+                <p><strong>Net Amount:</strong> $@Model.Driver.NetAmount</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events and Filter Widget -->
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">Associated Events</h3>
+            </div>
+            <div class="card-body">
+                <!-- Filter form for events -->
+                <form asp-action="FilteredEvents" method="get" class="mb-4">
+                    <input type="hidden" name="driverId" value="@Model.Driver.DriverID" />
+                    <div class="row g-2 justify-content-center">
+                        <div class="col-auto">                            
+                            <input type="date" id="startDate" name="startDate" class="form-control"
+                                   value="@ViewBag.StartDate?.ToString("yyyy-MM-dd")" placeholder="From Date" />
+                        </div>
+                        <div class="col-auto">                            
+                            <input type="date" id="endDate" name="endDate" class="form-control"
+                                   value="@ViewBag.EndDate?.ToString("yyyy-MM-dd")" placeholder="To Date" />
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Filter Events</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Associated Events Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Time of Event</th>
+                            <th>Amount In</th>
+                            <th>Amount Out</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Events != null && !Model.Events.Any())
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center">No events found.</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var eventItem in Model.Events)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => eventItem.Description)</td>
+                                    <td>@Html.DisplayFor(modelItem => eventItem.TimeOfEvent)</td>
+                                    <td>$@Html.DisplayFor(modelItem => eventItem.AmountIn)</td>
+                                    <td>$@Html.DisplayFor(modelItem => eventItem.AmountOut)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Back Button -->
+@if (User.IsInRole("Admin"))
+{
+    <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Back to Dashboard</a>
+}
+else
+{
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+}

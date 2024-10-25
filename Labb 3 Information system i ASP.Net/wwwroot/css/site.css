@@ -1,0 +1,104 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    background-color: #343a40; /* Dark background for the body */
+    color: #ffffff; /* Light text color for better contrast */
+}
+
+.card {
+    background-color: #292b2f; /* Dark card background */
+    color: #f8f9fa; /* Light text color on cards */
+    border: none; /* Remove card border for a cleaner look */
+}
+
+.card-header {
+    background-color: #495057; /* Darker header for cards */
+    color: #f8f9fa; /* Light text color on headers */
+}
+
+.table {
+    background-color: #292b2f; /* Dark table background */
+    color: #f8f9fa; /* Light text color for the table */
+}
+
+    .table th {
+        background-color: #343a40; /* Darker header for table */
+        color: #f8f9fa; /* Light text color for table headers */
+    }
+
+.table tbody tr {
+    background-color: #3a3f43; /* Darker gray for all rows */
+    color: #f8f9fa; /* Light text color for all rows */
+}
+
+    .table tbody tr:hover {
+        background-color: #495057; /* Slightly lighter gray on hover */
+        color: #f8f9fa; /* Light text color on hover */
+    }
+
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    border-color: #007bff;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+.btn-success {
+    background-color: #28a745; /* Green button */
+    border-color: #28a745;
+}
+
+    .btn-success:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+.form-control {
+    background-color: #495057; /* Darker background for inputs */
+    color: #ffffff; /* Light text color for inputs */
+}
+
+    .form-control::placeholder {
+        color: #cbd3d9; /* Lighter placeholder color for better visibility */
+        opacity: 1; /* Ensures the placeholder is fully opaque */
+    }
+
+    .form-control:focus {
+        background-color: #495057; /* Keep the same background color on focus */
+        color: #ffffff; /* Keep text color light on focus */
+        border-color: #007bff; /* Change border color on focus */
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Shadow on focus */
+    }
+
+
+h2, h5 {
+    color: #ffffff; /* Ensure headings are white for visibility */
+}
+
+.text-center {
+    color: #ffffff; /* Ensure center-aligned text is white for visibility */
+}
+
+.btn-active {
+    background-color: #007bff; /* Active button background color */
+    color: #fff; /* Active button text color */
+    border-color: #007bff; /* Active button border color */
+}
